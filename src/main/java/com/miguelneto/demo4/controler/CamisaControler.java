@@ -45,7 +45,8 @@ public class CamisaControler {
     public ResponseEntity<Camisa> atualizarCamisa(@PathVariable Long id,@RequestBody Camisa camisaNovaDados) {
         try {
             Camisa camisaAntiga = repositorio.findById(id).get();
-            camisaAntiga.setNome(camisaNovaDados.getNome());
+            camisaAntiga.setTipo(camisaNovaDados.getTipo());
+            camisaAntiga.setMarca(camisaNovaDados.getMarca());
             camisaAntiga.setCor(camisaNovaDados.getCor());
             camisaAntiga.setTamanho(camisaNovaDados.getTamanho());
             camisaAntiga.setPreco(camisaNovaDados.getPreco());

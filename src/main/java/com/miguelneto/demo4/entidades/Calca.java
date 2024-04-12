@@ -12,7 +12,8 @@ public class Calca {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nome;
+    private String tipo;
+    private String marca;
     private String tamanho;
     private String cor;
     private double preco;

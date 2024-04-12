@@ -46,7 +46,8 @@ public class CalcaControler {
     public ResponseEntity<Calca> alterarCalcaPorId(@PathVariable Long id, @RequestBody Calca calcaNovaDados) {
         try {
             Calca calcaAntiga = repositorio.findById(id).get();
-            calcaAntiga.setNome(calcaNovaDados.getNome());
+            calcaAntiga.setTipo(calcaNovaDados.getTipo());
+            calcaAntiga.setMarca(calcaNovaDados.getMarca());
             calcaAntiga.setCor(calcaNovaDados.getCor());
             calcaAntiga.setTamanho(calcaNovaDados.getTamanho());
             calcaAntiga.setPreco(calcaNovaDados.getPreco());
