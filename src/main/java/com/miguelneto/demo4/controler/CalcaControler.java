@@ -1,7 +1,8 @@
 package com.miguelneto.demo4.controler;
 
+import com.miguelneto.demo4.entidades.Calca;
 import com.miguelneto.demo4.entidades.Camisa;
-import com.miguelneto.demo4.repositorio.CamisaRepositorio;
+import com.miguelneto.demo4.repositorio.CalcaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,16 +12,16 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/Camisa")
-public class CamisaControler {
+@RequestMapping("/Calca")
+public class CalcaControler {
     @Autowired
-    private CamisaRepositorio repositorio;
+    private CalcaRepositorio repositorio;
     @GetMapping
-    public List<Camisa> ListarTodasCamisas() {
+    public List<Calca> ListarTodasCalcas() {
         return repositorio.findAll();
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Camisa>  getCamisa(@PathVariable Long id) {
+    public ResponseEntity<Calca>  getCamisa(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(repositorio.findById(id).get(), HttpStatus.OK);
         } catch (NoSuchElementException ex) {
@@ -29,11 +30,11 @@ public class CamisaControler {
         }
     }
     @PostMapping
-    public Camisa adicionarCamisa(@RequestBody Camisa novo) {
+    public Calca adicionarCalca(@RequestBody Calca novo) {
         return repositorio.save(novo);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCamisa(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCalca(@PathVariable Long id) {
         try {
             repositorio.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -41,21 +42,21 @@ public class CamisaControler {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Camisa> atualizarCamisa(@PathVariable Long id,@RequestBody Camisa camisaNovaDados) {
+@PutMapping("/{id}")
+    public ResponseEntity<Calca> alterarCalcaPorId(@PathVariable Long id, @RequestBody Calca calcaNovaDados) {
         try {
-            Camisa camisaAntiga = repositorio.findById(id).get();
-            camisaAntiga.setNome(camisaNovaDados.getNome());
-            camisaAntiga.setCor(camisaNovaDados.getCor());
-            camisaAntiga.setTamanho(camisaNovaDados.getTamanho());
-            camisaAntiga.setPreco(camisaNovaDados.getPreco());
+            Calca calcaAntiga = repositorio.findById(id).get();
+            calcaAntiga.setNome(calcaNovaDados.getNome());
+            calcaAntiga.setCor(calcaNovaDados.getCor());
+            calcaAntiga.setTamanho(calcaNovaDados.getTamanho());
+            calcaAntiga.setPreco(calcaNovaDados.getPreco());
 
 
-            return new ResponseEntity<>(repositorio.save(camisaAntiga),HttpStatus.OK);
+            return new ResponseEntity<>(repositorio.save(calcaAntiga),HttpStatus.OK);
 
         } catch  (NoSuchElementException exception){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-            }
+    }
 }
